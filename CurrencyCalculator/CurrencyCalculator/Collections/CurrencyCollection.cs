@@ -15,5 +15,17 @@ namespace CurrencyCalculator.Collections
         public ICurrencyIterator CreateIterator() => new CurrencyIterator(_currencies);
 
         public int Count => _currencies.Count;
+
+        public Currency? FindByCode(string code)
+        {
+            var it = CreateIterator();
+            while (it.HasNext())
+            {
+                var currency = it.Next();
+                if (currency.Code == code.Trim().ToUpperInvariant())
+                    return currency;
+            }
+            return null;
+        }
     }
 }

@@ -1,10 +1,12 @@
-﻿namespace CurrencyCalculator.Models
+﻿using CurrencyCalculator.Collections;
+
+namespace CurrencyCalculator.Models
 {
     public sealed class ExchangeRateTable
     {
         public string TableNumber { get; }
         public DateOnly PublicationDate { get; }
-        public IReadOnlyList<Currency> Currencies { get; }
+        public CurrencyCollection Currencies { get; }
 
         public ExchangeRateTable(string tableNumber, DateOnly publicationDate, IEnumerable<Currency> currencies)
         {
@@ -14,7 +16,7 @@
 
             TableNumber = tableNumber.Trim();
             PublicationDate = publicationDate;
-            Currencies = currencies.ToList();
+            Currencies = new CurrencyCollection(currencies);
         }
     }
 }
